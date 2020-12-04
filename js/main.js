@@ -8,7 +8,8 @@ var scoreText = document.getElementById('score')
 var choices = document.getElementsByClassName('choices')
 var results = document.getElementsByClassName('results')
 var scoreBox = document.getElementById('score-box')
-
+var playAgain = document.getElementById('play-again')
+var end = document.getElementById('end-screen')
 var questions = [
     {
         q: "Who was the first King of Bosnia?",
@@ -80,7 +81,7 @@ function checkAnswers (answer){
         currentQuestionIndex++
         renderQuestion()
     }else{
-        alert("Your score is: " + score + " Click button to play again!")
+        endScreen()
         currentQuestionIndex = 0
         score = 0
         for (var i = 0; i<=lastQuestionIndex;i++){
@@ -105,3 +106,17 @@ function answerIsCorrect(){
 function answerIsWrong(){
     document.getElementById(currentQuestionIndex).style.backgroundColor = "#f00";
 }
+
+function endScreen(){
+    const html = `<p class="end-text">Thank you for playing this quiz.Your score is: ` + score + `</p> <p class="end-text">Press a button to play again.</p>`
+    end.innerHTML = html
+    end.style.display = "block"
+    playAgain.style.display = "block"
+}
+
+function startOver (){
+    end.style.display = "none"
+    playAgain.style.display = "none"
+}
+
+playAgain.addEventListener("click", startOver)
